@@ -29,11 +29,10 @@ db.connect( (err) => {
 	console.log('MySQL Connected...');
 });
 
-
 app.get('/photos', (req, res) => {
-	db.query(`SELECT image_id, image_file, name, year 
-				FROM image INNER JOIN collection 
-				ON collection.collection_id = image.collection_id
+	db.query(`SELECT gallery_id, image_file, name, year 
+				FROM gallery INNER JOIN image
+				ON gallery.image_id = image.image_id
 				ORDER BY year DESC`, (err, result) => {
 		if (err) {
 			throw err;
@@ -45,25 +44,8 @@ app.get('/photos', (req, res) => {
 	});
 });
 
-/*
-app.get('/photos', (req, res) => {
-	db.query(`SELECT * FROM collection ORDER BY year DESC`, (err, result) => {
-		if (err) {
-			throw err;
-		} else {
-			res.json({
-				data: result
-			});
-		}
-	});
-});*/
-
 app.get('/photos/:photo_year?', (req, res) => {
-	console.log(req.params.photo_year);
-	db.query(`SELECT image_id, image_file, name, year 
-				FROM image INNER JOIN collection 
-				ON collection.collection_id = image.collection_id
-				WHERE year = ${req.params.photo_year}`, (err, result) => {
+	db.query(`SELECT * FROM image WHERE year = ${req.params.photo_year}`, (err, result) => {
 		if (err) {
 			throw err;
 		} else {

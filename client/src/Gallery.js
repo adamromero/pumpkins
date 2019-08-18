@@ -25,20 +25,8 @@ class Gallery extends Component {
 				<h1>Pumpkins</h1>
 				<img className="pumpkin-logo" src="images/jack-o-lantern.png" alt="Pumpkins"/>
 				<div className="row">
-				{photos.map(({image_id, image_file, name, year}) => 
-					
-					<Link 
-						to={{
-							pathname: `/${year}`,
-							state: {
-								image_id,
-								image_file,
-								name,
-								year
-							}
-						}} 
-						className="pumpkin-col" 
-						key={image_id}>
+				{photos.map(({gallery_id, image_file, name, year}) => 
+					<Link to={`/${year}`} className="pumpkin-col" key={gallery_id}>
 						<h2 className="pumpkin-year">{year}</h2>
 						<img className="pumpkin-image" src={'images/' + image_file} width="300" alt={name} />
 					</Link>
