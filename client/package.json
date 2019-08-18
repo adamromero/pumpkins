@@ -1,8 +1,10 @@
 {
   "name": "client",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "proxy": "http://localhost:5000/",
+  "description": "",
+  "main": "src/index.js",
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -29,5 +31,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "author": "",
+  "license": "ISC"
 }
