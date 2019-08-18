@@ -20,6 +20,8 @@
     "mysql": "^2.16.0"
   },
   "devDependencies": {
+    "glob": "^7.1.4",
+    "mkdirp": "^0.5.1",
     "nodemon": "^1.17.4",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1"
