@@ -12,7 +12,11 @@ class Gallery extends Component {
 	}
 
 	getPhotos = () => {
-		fetch('http://localhost:5000/photos')
+		const url = (process.env.NODE_ENV === 'production') 
+		? 'https://quiet-chamber-88821.herokuapp.com/photos'
+		: 'http://localhost:5000/photos';
+
+		fetch(url)
 			.then(res => res.json())
 			.then(res => this.setState({ photos: res.data }))
 			.catch(err => console.error(err));
