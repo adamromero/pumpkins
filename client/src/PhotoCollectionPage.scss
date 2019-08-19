@@ -1,0 +1,13 @@
+.pumpkin-collection {
+	display: flex;
+}
+
+.pumpkin-collection__photos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.pumpkin-collection__photo-item {
+	cursor: pointer;
+}

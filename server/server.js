@@ -4,6 +4,7 @@ const path = require('path');
 const cors = require('cors');
 const mysql = require('mysql');
 const keys = require('./config');
+const index = require('./routes/index');
 const PORT = process.env.PORT || 5000;
 
 const app = express();
@@ -55,7 +56,7 @@ app.get('/photos/:photo_year?', (req, res) => {
 		}
 	});
 });
-
+app.use('/', index);
 app.listen(PORT, () => {
 	console.log(`Server started on port ${PORT}`);
 })

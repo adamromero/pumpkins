@@ -21,17 +21,13 @@ class Gallery extends Component {
 	render() {
 		const { photos } = this.state;
 		return (
-			<div className="pumpkins">
-				<h1>Pumpkins</h1>
-				<img className="pumpkin-logo" src="images/jack-o-lantern.png" alt="Pumpkins"/>
-				<div className="row">
-				{photos.map(({gallery_id, image_file, name, year}) => 
-					<Link to={`/${year}`} className="pumpkin-col" key={gallery_id}>
-						<h2 className="pumpkin-year">{year}</h2>
-						<img className="pumpkin-image" src={'images/' + image_file} width="300" alt={name} />
-					</Link>
-				)}
-				</div>
+			<div className="content">
+			{photos.map(({gallery_id, image_file, name, year}) => 
+				<Link to={`/${year}`} className="pumpkin-gallery" key={gallery_id}>
+					<h2 className="pumpkin-gallery__overlay pumpkin-gallery__year">{year}</h2>
+					<img className="pumpkin-gallery__thumb" src={'images/' + image_file} width="300" alt={name} />
+				</Link>
+			)}
 			</div>
 		);
 	}
