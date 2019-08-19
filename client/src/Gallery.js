@@ -26,6 +26,7 @@ class Gallery extends Component {
 				<Link to={`/${year}`} className="pumpkin-gallery" key={gallery_id}>
 					<h2 className="pumpkin-gallery__overlay pumpkin-gallery__year">{year}</h2>
 					<img className="pumpkin-gallery__thumb" src={'images/' + image_file} width="300" alt={name} />
+					<img className="placeholder" src="images/spin.svg" alt="Loading Image"/>
 				</Link>
 			)}
 			</div>
