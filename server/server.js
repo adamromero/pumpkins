@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname,'../client/build')));
 app.use(bodyParser.json());
 
 //CREATE CONNECTION
-const db = mysql.createConnection({
+const db = mysql.createPool({
 	host     : keys.DB_HOST,
 	user     : keys.DB_USER,
 	password : keys.DB_PASSWORD,
@@ -25,7 +25,7 @@ const db = mysql.createConnection({
 });
 
 //CONNECT
-db.connect( (err) => {
+db.getConnection( (err) => {
 	if(err) throw err;
 	console.log('MySQL Connected...');
 });
