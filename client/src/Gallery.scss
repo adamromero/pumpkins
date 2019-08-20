@@ -83,6 +83,16 @@ $pumpkin-orange: #ff8000;
   z-index: 1;
 }
 
+.pumpkin-gallery__rating {
+    position: absolute;
+    z-index: 9;
+    color: $pumpkin-orange;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    bottom: 20%;
+}
+
 @keyframes shadow {
   0% {
     box-shadow: 0 0 17px 8px $pumpkin-orange;

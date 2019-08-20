@@ -30,6 +30,20 @@ db.getConnection( (err) => {
 	console.log('MySQL Connected...');
 });
 
+app.get('/top_rated', (req, res) => {
+	db.query(`SELECT * FROM 
+				(SELECT * FROM image ORDER BY rating DESC limit 3) tmp 
+			  ORDER BY rating DESC;`, (err, result) => {
+		if (err) {
+			throw err;
+		} else {
+			res.json({
+				data: result
+			});
+		}
+	});
+});
+
 app.get('/photos', (req, res) => {
 	db.query(`SELECT gallery_id, image_file, name, year 
 				FROM gallery INNER JOIN image
