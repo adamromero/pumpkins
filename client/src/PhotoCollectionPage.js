@@ -14,11 +14,9 @@ class PhotoCollectionPage extends React.Component {
 	}
 
 	getPhotos = (year) => {
-		const url = (process.env.NODE_ENV === 'production') 
-		? `https://quiet-chamber-88821.herokuapp.com/photos/${year}`
-		: `http://localhost:5000/photos/${year}`;
+		const api = process.env.PUMPKIN_PHOTO_API || `http://localhost:5000/photos/${year}`;
 
-		fetch(url)
+		fetch(api)
 			.then(res => res.json())
 			.then(res => {
 				this.setState({ 
@@ -32,10 +30,12 @@ class PhotoCollectionPage extends React.Component {
 	}
 
 	handleClick = (image_file, name) => {
+		/*
 		this.setState({ 
 			selectedImage: image_file, 
 			selectedImageName: name 
-		});
+		});*/
+		console.log(name + ' clicked');
 	}
 
 	render() {
@@ -48,13 +48,9 @@ class PhotoCollectionPage extends React.Component {
 						{photos.map(({image_id, image_file, name, rating}) => 
 							<div className="pumpkin-collection__photo-item" key={image_id} onClick={() => this.handleClick(image_file, name)}>
 								<img src={`images/${image_file}`} alt={name} width="200" />
-								<p>{rating ? `Rating: ${rating}` : ''}</p>
+								<p>{rating ? `Likes: ${rating}` : ''}</p>
 							</div>
 						)}
-					</div>
-					<div className="pumpkin-collection__main-photo">
-						<p>{selectedImageName}</p>
-						<img src={`images/${selectedImage}`} alt={selectedImageName} style={{'maxWidth': '50%'}}/>
 					</div>
 				</div>	
 			</React.Fragment>	

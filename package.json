@@ -13,6 +13,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
+    "@glidejs/glide": "^3.3.0",
     "body-parser": "^1.18.3",
     "concurrently": "^3.5.1",
     "cors": "^2.8.5",

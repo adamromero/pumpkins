@@ -25,11 +25,9 @@ class Gallery extends Component {
 	}
 
 	getPhotos = () => {
-		const url = (process.env.NODE_ENV === 'production') 
-		? 'https://quiet-chamber-88821.herokuapp.com/photos'
-		: 'http://localhost:5000/photos';
+		const api = process.env.PUMPKIN_PHOTO_API || 'http://localhost:5000/photos';
 
-		fetch(url)
+		fetch(api)
 			.then(res => res.json())
 			.then(res => this.setState({ photos: res.data }))
 			.catch(err => console.error(err));
@@ -44,7 +42,7 @@ class Gallery extends Component {
 					{top.map(({image_id, image_file, name, year, rating}) => 
 						<Link to={`/${year}`} className="pumpkin-gallery" key={image_id}>
 						<h2 className="pumpkin-gallery__overlay pumpkin-gallery__year">{year}</h2>
-						<h3 className="pumpkin-gallery__rating">Rating: {rating}</h3>
+						<h3 className="pumpkin-gallery__rating">Likes: {rating}</h3>
 						<img className="pumpkin-gallery__thumb" src={'images/' + image_file} width="300" alt={name} />
 						<img className="placeholder" src="images/spin.svg" alt="Loading"/>
 						</Link>
