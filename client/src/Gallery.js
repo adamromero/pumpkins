@@ -15,7 +15,7 @@ class Gallery extends Component {
 	}
 
 	getTopRated = () => {
-		const api = process.env.NODE_ENV !== "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
+		const api = process.env.NODE_ENV === "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
 		console.log(`${api}/top_rated`);
 
 		fetch(`${api}/top_rated`)
