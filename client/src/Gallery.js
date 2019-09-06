@@ -15,20 +15,18 @@ class Gallery extends Component {
 	}
 
 	getTopRated = () => {
-		const url = (process.env.NODE_ENV === 'production') 
-		? 'https://quiet-chamber-88821.herokuapp.com/top_rated'
-		: 'http://localhost:5000/top_rated';
+		const api = process.env.PUMPKIN_PHOTO_API || 'http://localhost:5000';
 
-		fetch(url)
+		fetch(`${api}/top_rated`)
 		.then(res => res.json())
 		.then(res => this.setState({ top: res.data }))
 		.catch(err => console.error(err));
 	}
 
 	getPhotos = () => {
-		const api = process.env.PUMPKIN_PHOTO_API || 'http://localhost:5000/photos';
+		const api = process.env.PUMPKIN_PHOTO_API || 'http://localhost:5000';
 
-		fetch(api)
+		fetch(`${api}/photos`)
 			.then(res => res.json())
 			.then(res => this.setState({ photos: res.data }))
 			.catch(err => console.error(err));
