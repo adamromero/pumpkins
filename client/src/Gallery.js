@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import LazyLoad from 'react-lazyload';
 import './Gallery.scss';
 
 class Gallery extends Component {
@@ -43,7 +44,9 @@ class Gallery extends Component {
 						<Link to={`/${year}`} className="pumpkin-gallery" key={image_id}>
 						<h2 className="pumpkin-gallery__overlay pumpkin-gallery__year">{year}</h2>
 						<h3 className="pumpkin-gallery__rating">Likes: {rating}</h3>
-						<img className="pumpkin-gallery__thumb" src={'images/' + image_file} width="300" alt={name} />
+						<LazyLoad throttle={500}>
+							<img className="pumpkin-gallery__thumb" src={'images/' + image_file} width="300" alt={name} />
+						</LazyLoad>
 						<img className="placeholder" src="images/spin.svg" alt="Loading"/>
 						</Link>
 					)}
@@ -52,9 +55,11 @@ class Gallery extends Component {
 				<div className="content">
 					{photos.map(({gallery_id, image_file, name, year}) => 
 						<Link to={`/${year}`} className="pumpkin-gallery" key={gallery_id}>
-							<h2 className="pumpkin-gallery__overlay pumpkin-gallery__year">{year}</h2>
+						<h2 className="pumpkin-gallery__overlay pumpkin-gallery__year">{year}</h2>
+						<LazyLoad throttle={500}>
 							<img className="pumpkin-gallery__thumb" src={'images/' + image_file} width="300" alt={name} />
-							<img className="placeholder" src="images/spin.svg" alt="Loading"/>
+						</LazyLoad>
+						<img className="placeholder" src="images/spin.svg" alt="Loading"/>
 						</Link>
 					)}
 				</div>
