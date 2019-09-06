@@ -15,7 +15,8 @@ class Gallery extends Component {
 	}
 
 	getTopRated = () => {
-		const api = process.env.NODE_ENV === "production" ? process.env.PUMPKIN_PHOTO_API : `http://localhost:5000`;
+		const api = process.env.NODE_ENV !== "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
+		console.log(`${api}/top_rated`);
 
 		fetch(`${api}/top_rated`)
 		.then(res => res.json())
@@ -24,7 +25,7 @@ class Gallery extends Component {
 	}
 
 	getPhotos = () => {
-		const api = process.env.NODE_ENV === "production" ? process.env.PUMPKIN_PHOTO_API : `http://localhost:5000`;
+		const api = process.env.NODE_ENV === "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
 
 		fetch(`${api}/photos`)
 			.then(res => res.json())
