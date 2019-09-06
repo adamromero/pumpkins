@@ -15,7 +15,7 @@ class PhotoCollectionPage extends React.Component {
 
 	getPhotos = (year) => {
 		console.log(year);
-		const api = process.env.NODE_ENV === "production" ? process.env.PUMPKIN_PHOTO_API : 'http://localhost:5000';
+		const api = process.env.NODE_ENV === "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
 
 		fetch(`${api}/photos/${year}`)
 			.then(res => res.json())
