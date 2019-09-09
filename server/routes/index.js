@@ -16,6 +16,10 @@ router.get('/photos', (req, res) => {
 	});
 });
 
+router.post('/photos/new', (req, res, next) => {
+	
+});
+
 router.get('/photos/:photo_year?', (req, res) => {
 	db.query(`SELECT * FROM image WHERE year = ${req.params.photo_year}`, (err, result) => {
 		if (err) {
