@@ -12,3 +12,8 @@
 .pumpkin-collection__photo-item {
 	cursor: pointer;
 }
+
+.carousel .slider-wrapper, .carousel.carousel-slider {
+    max-width: 600px;
+    margin: auto !important;
+}

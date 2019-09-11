@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 class Admin extends React.Component {
 
@@ -11,10 +10,10 @@ class Admin extends React.Component {
 			filepath: e.target.filepath.value
 		};
 
-		fetch("/photos/new", {
+		fetch("/photos", {
 			method: 'POST',
 			headers: { 'Content-Type': 'applicaton/json' },
-			body: JSON.stringify(data)
+			body: JSON.stringify(entry)
 		}).then((response) => {
 			if (response.status >= 400) {
 				throw new Error("bad response from server");

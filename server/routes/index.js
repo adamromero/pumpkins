@@ -16,8 +16,12 @@ router.get('/photos', (req, res) => {
 	});
 });
 
-router.post('/photos/new', (req, res, next) => {
-	
+router.post('/photos', (req, res, next) => {
+	console.log(req.body.name);
+	console.log(req.body.year);
+	console.log(req.body.filepath);
+
+
 });
 
 router.get('/photos/:photo_year?', (req, res) => {
