@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Admin extends React.Component {
+class Admin extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
