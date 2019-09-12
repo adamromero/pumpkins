@@ -70,7 +70,7 @@ app.get('/photos/:photo_year?', (req, res) => {
 	});
 });
 
-app.post('/photos/:photo_year?', function(req, res) {
+app.post('/photos/:photo_year?', (req, res) => {
 	const data = req.body;
 	db.query(`INSERT into image VALUES (NULL, '${data.filepath}', '${data.name}', '${data.year}', NULL)`, (err, results) => {
 		if (err) throw err;
@@ -78,7 +78,7 @@ app.post('/photos/:photo_year?', function(req, res) {
 	});
 });
 
-app.get('/*', function(req, res) {
+app.get('/*', (req, res) => {
 	res.sendFile(path.join(__dirname, '../client/public/index.html'), function(err) {
 		if (err) {
 			res.status(500).send(err)
