@@ -58,6 +58,18 @@ app.get('/photos', (req, res) => {
 	});
 });
 
+app.get('/photos_all', (req, res) => {
+	db.query(`SELECT * FROM image`, (err, result) => {
+		if (err) {
+			throw err;
+		} else {
+			res.json({
+				data: result
+			});
+		}
+	});
+});
+
 app.get('/photos/:photo_year?', (req, res) => {
 	db.query(`SELECT * FROM image WHERE year = ${req.params.photo_year}`, (err, result) => {
 		if (err) {
@@ -72,10 +84,21 @@ app.get('/photos/:photo_year?', (req, res) => {
 
 app.post('/photos/:photo_year?', function(req, res) {
 	const data = req.body;
+	console.log(data);
+
 	db.query(`INSERT into image VALUES (NULL, '${data.filepath}', '${data.name}', '${data.year}', NULL)`, (err, results) => {
 		if (err) throw err;
 		res.end(JSON.stringify(results));
 	});
+	
+	
+	if (data.gallery_image) {
+		db.query(`INSERT INTO gallery VALUES (NULL, (SELECT image_id FROM image WHERE filepath = '${data.filepath}'))`, (err, results) => {
+			if (err) throw err;
+			res.end(JSON.stringify(results));
+		});
+	}
+
 });
 
 app.listen(PORT, () => {

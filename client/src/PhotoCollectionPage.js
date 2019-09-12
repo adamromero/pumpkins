@@ -16,7 +16,7 @@ class PhotoCollectionPage extends Component {
 	}
 
 	getPhotos = (year) => {
-		const api = process.env.NODE_ENV === "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
+		const api = process.env.NODE_ENV === "production" || true ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
 
 		fetch(`${api}/photos/${year}`)
 			.then(res => res.json())

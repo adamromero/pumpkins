@@ -9,11 +9,11 @@ class Login extends Component {
 			error: {}
 		}
 	}
+	
 	handleSubmit = (e) => {
 		e.preventDefault();
-
-
 	}
+
 	render() {
 		return (
 			<div>
