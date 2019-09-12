@@ -15,8 +15,7 @@ class Gallery extends Component {
 	}
 
 	getTopRated = () => {
-		const api = process.env.NODE_ENV === "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
-		console.log(`${api}/top_rated`);
+		const api = process.env.NODE_ENV === "production" || true ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
 
 		fetch(`${api}/top_rated`)
 		.then(res => res.json())
@@ -25,7 +24,7 @@ class Gallery extends Component {
 	}
 
 	getPhotos = () => {
-		const api = process.env.NODE_ENV === "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
+		const api = process.env.NODE_ENV === "production" || true ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
 
 		fetch(`${api}/photos`)
 			.then(res => res.json())
@@ -41,12 +40,12 @@ class Gallery extends Component {
 				<div className="content">
 					{top.map(({image_id, image_file, name, year, rating}) => 
 						<Link to={`/${year}`} className="pumpkin-gallery" key={image_id}>
-						<h2 className="pumpkin-gallery__overlay pumpkin-gallery__year">{year}</h2>
-						<h3 className="pumpkin-gallery__rating">Likes: {rating}</h3>
-						<LazyLoad throttle={500}>
-							<img className="pumpkin-gallery__thumb" src={'images/' + image_file} width="300" alt={name} />
-						</LazyLoad>
-						<img className="placeholder" src="images/spin.svg" alt="Loading"/>
+							<h2 className="pumpkin-gallery__overlay pumpkin-gallery__year">{year}</h2>
+							<h3 className="pumpkin-gallery__rating">Likes: {rating}</h3>
+							<LazyLoad throttle={400}>
+								<img className="pumpkin-gallery__thumb" src={'images/' + image_file} width="300" alt={name} />
+							</LazyLoad>
+							<img className="placeholder" src="images/spin.svg" alt="Loading"/>
 						</Link>
 					)}
 				</div>
@@ -54,11 +53,11 @@ class Gallery extends Component {
 				<div className="content">
 					{photos.map(({gallery_id, image_file, name, year}) => 
 						<Link to={`/${year}`} className="pumpkin-gallery" key={gallery_id}>
-						<h2 className="pumpkin-gallery__overlay pumpkin-gallery__year">{year}</h2>
-						<LazyLoad throttle={500}>
-							<img className="pumpkin-gallery__thumb" src={'images/' + image_file} width="300" alt={name} />
-						</LazyLoad>
-						<img className="placeholder" src="images/spin.svg" alt="Loading"/>
+							<h2 className="pumpkin-gallery__overlay pumpkin-gallery__year">{year}</h2>
+							<LazyLoad throttle={400}>
+								<img className="pumpkin-gallery__thumb" src={'images/' + image_file} width="300" alt={name} />
+							</LazyLoad>
+							<img className="placeholder" src="images/spin.svg" alt="Loading"/>
 						</Link>
 					)}
 				</div>

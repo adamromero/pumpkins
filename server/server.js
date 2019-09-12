@@ -4,7 +4,6 @@ const path = require('path');
 const cors = require('cors');
 const mysql = require('mysql');
 const keys = require('./config');
-const index = require('./routes/index');
 const PORT = process.env.PORT || 5000;
 
 const app = express();
@@ -70,7 +69,15 @@ app.get('/photos/:photo_year?', (req, res) => {
 		}
 	});
 });
-app.use('/', index);
+
+app.post('/photos/:photo_year?', function(req, res) {
+	const data = req.body;
+	db.query(`INSERT into image VALUES (NULL, '${data.filepath}', '${data.name}', '${data.year}', NULL)`, (err, results) => {
+		if (err) throw err;
+		res.end(JSON.stringify(results));
+	});
+});
+
 app.listen(PORT, () => {
 	console.log(`Server started on port ${PORT}`);
 })

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Carousel } from "react-responsive-carousel";
 import './PhotoCollectionPage.scss';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-class PhotoCollectionPage extends React.Component {
+class PhotoCollectionPage extends Component {
 	state = {
 		photos: [],
 		year: null,
@@ -14,7 +16,6 @@ class PhotoCollectionPage extends React.Component {
 	}
 
 	getPhotos = (year) => {
-		console.log(year);
 		const api = process.env.NODE_ENV === "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
 
 		fetch(`${api}/photos/${year}`)
@@ -46,12 +47,14 @@ class PhotoCollectionPage extends React.Component {
 				<h2>{year}</h2>
 				<div className="pumpkin-collection">
 					<div className="pumpkin-collection__photos">
-						{photos.map(({image_id, image_file, name, rating}) => 
-							<div className="pumpkin-collection__photo-item" key={image_id} onClick={() => this.handleClick(image_file, name)}>
-								<img src={`images/${image_file}`} alt={name} width="200" />
-								<p>{rating ? `Likes: ${rating}` : ''}</p>
-							</div>
-						)}
+						<Carousel autoPlay>
+							{photos.map(({image_id, image_file, name, rating}) => 
+								<div className="pumpkin-collection__photo-item" key={image_id} onClick={() => this.handleClick(image_file, name)}>
+									<img src={`images/${image_file}`} alt={name} />
+									<p>{rating ? `Likes: ${rating}` : ''}</p>
+								</div>
+							)}
+						</Carousel>
 					</div>
 				</div>	
 			</React.Fragment>	
