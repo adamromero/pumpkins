@@ -70,6 +70,18 @@ app.get('/photos_all', (req, res) => {
 	});
 });
 
+app.get('/photo/:id?', (req, res) => {
+	db.query(`SELECT * FROM image WHERE image_id = ${req.params.id}`, (err, result) => {
+		if (err) {
+			throw err;
+		} else {
+			res.json({
+				data: result
+			});
+		}
+	});
+});
+
 app.get('/photos/:photo_year?', (req, res) => {
 	db.query(`SELECT * FROM image WHERE year = ${req.params.photo_year}`, (err, result) => {
 		if (err) {

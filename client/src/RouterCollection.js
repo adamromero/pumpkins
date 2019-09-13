@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Gallery from './Gallery';
 import PhotoCollectionPage from './PhotoCollectionPage';
 import Admin from './Admin';
+import AdminEdit from './AdminEdit';
 
 const RouterCollection = () => (
 	<div className="pumpkin">
@@ -22,6 +23,7 @@ const RouterCollection = () => (
 			<Route path="/2011" render={props => <PhotoCollectionPage {...props} />} />
 			<Route path="/2010" render={props => <PhotoCollectionPage {...props} />} />
 			<Route path="/admin" component={Admin} />
+			<Route path="/edit/:id" component={AdminEdit} />
 		</Router>
 	</div>
 );

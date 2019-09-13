@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Admin extends Component {
@@ -11,7 +12,7 @@ class Admin extends Component {
 	}
 
 	getPhotos = () => {
-		const api = process.env.NODE_ENV === "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
+		const api = process.env.NODE_ENV !== "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
 
 		fetch(`${api}/photos_all`)
 			.then(res => res.json())
@@ -28,7 +29,7 @@ class Admin extends Component {
 			gallery_image: e.target.gallery_image.checked
 		};
 
-		const api = process.env.NODE_ENV === "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
+		const api = process.env.NODE_ENV !== "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
 		axios.post(`${api}/photos/${entry.year}`, entry)
 			.then(res => {
 				console.log(res);
@@ -47,17 +48,24 @@ class Admin extends Component {
 				<table>
 					<thead>
 						<tr>
+							<th>ID</th>
 							<th>Name</th>
 							<th>Image</th>
 							<th>Year</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
 					{photos.map(({image_id, image_file, name, year, rating}) => (
 						<tr key={image_id}>
+							<td>{image_id}</td>
 							<td>{name}</td>
 							<td><img src={`images/${image_file}`} width="100" alt={name}/></td>
 							<td>{year}</td>
+							<td>
+								<Link to={`/edit/${image_id}`}>Edit</Link>
+								<button>Delete</button>
+							</td>
 						</tr>
 					))}
 					</tbody>
