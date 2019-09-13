@@ -10,7 +10,7 @@ const app = express();
 
 app.use(cors())
 //STATIC FOLDER
-app.use(express.static(path.join(__dirname,'../client/build')));
+app.use(express.static(path.join(__dirname,'../client/public')));
 
 // Body Parser Middleware
 app.use(bodyParser.json());
@@ -25,7 +25,7 @@ const db = mysql.createPool({
 
 //CONNECT
 db.getConnection( (err) => {
-	if(err) throw err;
+	if (err) throw err;
 	console.log('MySQL Connected...');
 });
 
