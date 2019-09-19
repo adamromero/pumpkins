@@ -32,12 +32,12 @@ db.getConnection( (err) => {
 app.get('/top_rated', (req, res) => {
 	db.query(`SELECT * FROM 
 				(SELECT * FROM image ORDER BY rating DESC limit 3) tmp 
-			  ORDER BY rating DESC;`, (err, result) => {
+			  ORDER BY rating DESC;`, (err, results) => {
 		if (err) {
 			throw err;
 		} else {
 			res.json({
-				data: result
+				data: results
 			});
 		}
 	});
@@ -47,58 +47,84 @@ app.get('/photos', (req, res) => {
 	db.query(`SELECT gallery_id, image_file, name, year 
 				FROM gallery INNER JOIN image
 				ON gallery.image_id = image.image_id
-				ORDER BY year DESC`, (err, result) => {
+				ORDER BY year DESC`, (err, results) => {
 		if (err) {
 			throw err;
 		} else {
 			res.json({
-				data: result
+				data: results
 			});
 		}
 	});
 });
 
 app.get('/photos_all', (req, res) => {
-	db.query(`SELECT * FROM image`, (err, result) => {
+	db.query(`SELECT * FROM image ORDER BY year DESC`, (err, results) => {
 		if (err) {
 			throw err;
 		} else {
 			res.json({
-				data: result
+				data: results
 			});
 		}
 	});
 });
 
 app.get('/photo/:id?', (req, res) => {
-	db.query(`SELECT * FROM image WHERE image_id = ${req.params.id}`, (err, result) => {
+	db.query(`SELECT * FROM image WHERE image_id = ${req.params.id}`, (err, results) => {
 		if (err) {
 			throw err;
 		} else {
 			res.json({
-				data: result
+				data: results
 			});
 		}
 	});
 });
 
+//retrieve
 app.get('/photos/:photo_year?', (req, res) => {
-	db.query(`SELECT * FROM image WHERE year = ${req.params.photo_year}`, (err, result) => {
+	db.query(`SELECT * FROM image WHERE year = ${req.params.photo_year}`, (err, results) => {
 		if (err) {
 			throw err;
 		} else {
 			res.json({
-				data: result
+				data: results
 			});
 		}
 	});
 });
 
+//delete
+app.post('/delete/:photo_id?', (req, res) => {
+	db.query(`DELETE FROM image WHERE image_id = '${req.params.photo_id}'`, (err, results) => {
+		if (err) {
+			throw err;
+		} else {
+			res.json({
+				data: results
+			});
+		}
+	});
+});
+
+//edit
+app.post('/edit/:photo_id?', (req, res) => {
+	const data = req.body;
+
+	db.query(`UPDATE image 
+				SET image_file = '${data.filepath}', name = '${data.name}', year = '${data.year}' 
+				WHERE image_id = '${req.params.photo_id}'`, (err, results) => {
+		if (err) throw err;
+		res.end(JSON.stringify(results));
+	});
+});
+
+//create
 app.post('/photos/:photo_year?', (req, res) => {
 	const data = req.body;
-	console.log(data);
 
-	db.query(`INSERT into image VALUES (NULL, '${data.filepath}', '${data.name}', '${data.year}', NULL)`, (err, results) => {
+	db.query(`INSERT INFO image VALUES (NULL, '${data.filepath}', '${data.name}', '${data.year}', NULL)`, (err, results) => {
 		if (err) throw err;
 		res.end(JSON.stringify(results));
 	});
@@ -111,7 +137,7 @@ app.post('/photos/:photo_year?', (req, res) => {
 	}
 });
 
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, '../client/public/index.html'), function(err) {
 		if (err) {
 			res.status(500).send(err)

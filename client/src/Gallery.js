@@ -36,18 +36,20 @@ class Gallery extends Component {
 		const { top, photos } = this.state;
 		return (
 			<React.Fragment>
-				<h2>Top Rated</h2>
-				<div className="content">
-					{top.map(({image_id, image_file, name, year, rating}) => 
-						<Link to={`/${year}`} className="pumpkin-gallery" key={image_id}>
-							<h2 className="pumpkin-gallery__overlay pumpkin-gallery__year">{year}</h2>
-							<h3 className="pumpkin-gallery__rating">Likes: {rating}</h3>
-							<LazyLoad throttle={400}>
-								<img className="pumpkin-gallery__thumb" src={'images/' + image_file} width="300" alt={name} />
-							</LazyLoad>
-							<img className="placeholder" src="images/spin.svg" alt="Loading"/>
-						</Link>
-					)}
+				<div style={{'display': 'none'}}>
+					<h2>Top Rated</h2>
+					<div className="content">
+						{top.map(({image_id, image_file, name, year, rating}) => 
+							<Link to={`/${year}`} className="pumpkin-gallery" key={image_id}>
+								<h2 className="pumpkin-gallery__overlay pumpkin-gallery__year">{year}</h2>
+								<h3 className="pumpkin-gallery__rating">Likes: {rating}</h3>
+								<LazyLoad throttle={400}>
+									<img className="pumpkin-gallery__thumb" src={'images/' + image_file} width="300" alt={name} />
+								</LazyLoad>
+								<img className="placeholder" src="images/spin.svg" alt="Loading"/>
+							</Link>
+						)}
+					</div>
 				</div>
 				<h2>Gallery</h2>
 				<div className="content">

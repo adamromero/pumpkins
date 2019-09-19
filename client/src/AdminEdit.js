@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class AdminEdit extends Component {
 	constructor(props) {
@@ -22,6 +23,19 @@ class AdminEdit extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
+		const entry = {
+			image_file: e.target.image_file.value,
+			name: e.target.name.value,
+			year: e.target.year.value,
+			rating: e.target.rating.value
+		};
+		console.log(entry);
+		const api = process.env.NODE_ENV === "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
+		axios.post(`${api}/edit/${this.props.match.params.id}`, entry)
+			.then(res => res.data)
+			.catch(error => {
+				console.log(error);
+			});
 	}
 
 	render() {

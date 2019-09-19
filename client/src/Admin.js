@@ -20,6 +20,12 @@ class Admin extends Component {
 			.catch(err => console.error(err));
 	}
 
+	deletePhoto = (id) => {
+		const api = process.env.NODE_ENV === "production" ? 'https://quiet-chamber-88821.herokuapp.com' : 'http://localhost:5000';
+		axios.delete(`${api}/delete/${id}`)
+		.then(res => res.data);
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault();
 		const entry = {
@@ -64,7 +70,7 @@ class Admin extends Component {
 							<td>{year}</td>
 							<td>
 								<Link to={`/edit/${image_id}`}>Edit</Link>
-								<button>Delete</button>
+								<button onClick={() => this.deletePhoto(image_id)}>Delete</button>
 							</td>
 						</tr>
 					))}
